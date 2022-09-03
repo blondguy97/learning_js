@@ -3,7 +3,7 @@
 	"indent": 2,
 	"undef": true,
 	"quotmark": false,
-	"maxlen": 1020,
+	"maxlen": 1500,
 	"trailing": true,
 	"curly": true,
 	"strict": false,
