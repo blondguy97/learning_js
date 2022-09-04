@@ -28,20 +28,35 @@ let personalMovieDB = {
 
 if (personalMovieDB.count < 10) {
     alert('Просмотрено довольно мало фильмов');
-} 
+}
 else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
     alert('Вы классический зритель');
-} 
+}
 else if (personalMovieDB.count > 30) {
-    alert ('Вы киноман!');
+    alert('Вы киноман!');
 }
 else {
     alert('Ошибка!');
 }
 
-for (let i = 0; i < 2; i++) {
+// for (let i = 0; i < 2; i++) {
+//     let a = prompt('Один из последних просмотренных фильмов?'),
+//         b = prompt('На сколько оцените его?');
+//     if (a == '' || b == '' || a == null || b == null || a.length > 50) {
+//         i--;
+//     }
+//     else {
+//         personalMovieDB.movies[a] = b;
+//     }
+// }
+
+let i = 0;
+
+while (i < 2) {
     let a = prompt('Один из последних просмотренных фильмов?'),
         b = prompt('На сколько оцените его?');
+        
+    i++;
     if (a == '' || b == '' || a == null || b == null || a.length > 50) {
         i--;
     }
