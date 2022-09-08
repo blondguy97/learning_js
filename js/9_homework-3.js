@@ -55,10 +55,12 @@ function detectPersonalLvl() {
 
 function rememberMyMovies() {
     for (let i = 0; i < 2; i++) {
-        let a = prompt('Один из последних просмотренных фильмов?'),
-            b = prompt('На сколько оцените его?');
+        let a = prompt('Один из последних просмотренных фильмов?').trim(), 
+            b = prompt('На сколько оцените его?').trim(); 
+            /* метод trim ставим чтобы пользователь не мог ввести одни пробелы и это засчиталось бы за ответ */
         if (a == '' || b == '' || a == null || b == null || a.length > 50) {
             i--;
+            console.log('error');
         }
         else {
             personalMovieDB.movies[a] = b;
@@ -68,22 +70,24 @@ function rememberMyMovies() {
 
 // rememberMyMovies();
 
-// Аналог цикла в функции rememberMyMovies();
+/* Аналог цикла в функции rememberMyMovies();
 
-// let i = 0;
+let i = 0;
 
-// while (i < 2) {
-//     let a = prompt('Один из последних просмотренных фильмов?'),
-//         b = prompt('На сколько оцените его?');
+while (i < 2) {
+    let a = prompt('Один из последних просмотренных фильмов?'),
+        b = prompt('На сколько оцените его?');
 
-//     i++;
-//     if (a == '' || b == '' || a == null || b == null || a.length > 50) {
-//         i--;
-//     }
-//     else {
-//         personalMovieDB.movies[a] = b;
-//     }
-// }
+    i++;
+    if (a == '' || b == '' || a == null || b == null || a.length > 50) {
+        i--;
+    }
+    else {
+        personalMovieDB.movies[a] = b;
+    }
+} */
+
+
 
 
 
@@ -100,10 +104,14 @@ showMyDB(personalMovieDB.privat);
 
 
 function writeYourGenres() {
-    for(let i = 1; i <= 3; i++) {
-        personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`);
+    for (let i = 0; i < 3; i++) {
+        personalMovieDB.genres[i] = prompt(`Ваш любимый жанр под номером ${i + 1}`);
     }
 }
 
 writeYourGenres();
+
+
+
+
 
