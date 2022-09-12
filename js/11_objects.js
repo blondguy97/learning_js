@@ -107,7 +107,7 @@ options_2.makeTest(); // Выпонился блок кода в методе ma
 
 const {width} = options_2; 
 
-const {bg} = options_2.colors; // 
+const {bg} = options_2.colors; // вытаскиваем свойство bg из объекта colors который находится в объекте options_2
 
 console.log(width); // 1024
 console.log(bg); // red

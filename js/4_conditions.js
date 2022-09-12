@@ -10,13 +10,13 @@ if (4 == 10) {
 
 const num = 50;
 
-// if (num < 49) {
-//     console.log('error');
-// } else if (num > 100) {
-//     console.log('error too'); // С помощью блок else if можно бесконечно развлетвлять условия
-// } else {
-//     console.log('everything ok!'); // если ни одно из условий не подошло, выполняется блок else
-// }
+if (num < 49) {
+    console.log('error');
+} else if (num > 100) {
+    console.log('error too'); // С помощью блок else if можно бесконечно развлетвлять условия
+} else {
+    console.log('everything ok!'); // если ни одно из условий не подошло, выполняется блок else
+}
 
 (num === 50) ? console.log('everything ok!') : console.log('error');
 
@@ -48,7 +48,7 @@ switch (testNum) {
 }
 
 // Условия switch проверяет только строгим сравнением.
-// Директива break обязательно, ведь без нее код пойдет дальше, даже если нарвется ан правдивый case
+// Директива break обязательно, ведь без нее код пойдет дальше, даже если нарвется на правдивый case
 
 
 const hamburger = true;
