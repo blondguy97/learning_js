@@ -150,4 +150,17 @@ let newObj = {...oldObj};
 
 console.log(newObj);
 
+const someString = 'strsing';
+
+function reverse (string) {
+
+    if (string !== 'string') {
+        console.log('error');
+    }
+    else {
+        console.log(string.split('').reverse().join(''));
+    }
+}
+
+reverse(someString)
 
