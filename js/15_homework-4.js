@@ -61,15 +61,24 @@ let personalMovieDB = {
  "Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
     writeYourGenres: function () {
-        for (let i = 0; i < 3; i++) {
-            let genres = prompt(`Ваш любимый жанр под номером ${i + 1}`);
-            if (genres == null || genres == '') {
+        /*  for (let i = 0; i < 3; i++) {
+            let genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);
+            if (genre == null || genre == '') {
                 i--;
                 alert('Вы ввели ввели неверные данные или отменили действие!');
-            } 
-            else {
-                personalMovieDB.genres[i] = genres;
+            } else {
+                personalMovieDB.genres[i] = genre;
+
             }
+        } */
+        for (let i = 0; i < 1; i++) {
+            let genre = prompt(`Введите ваши любимые жанры через запятую`);
+            if (genre == null || genre == '') {
+                i--;
+                alert('Вы ввели ввели неверные данные или отменили действие!');
+            } else {
+                personalMovieDB.genres = genre.split(', ');
+            } // Более усовершенствованная версия цикла, с добавлением метода строк split который преобразует слова в массив
         }
         personalMovieDB.genres.forEach(function (item, i) {
             console.log(`Любимый жанр ${i + 1} - это ${item}`);
@@ -93,10 +102,7 @@ let personalMovieDB = {
     }
 };
 
-
-personalMovieDB.writeYourGenres();
-
-
+console.log(personalMovieDB);
 
 
 
