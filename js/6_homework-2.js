@@ -39,13 +39,16 @@ else {
     alert('Ошибка!');
 }
 
+console.log(personalMovieDB);
+
 // for (let i = 0; i < 2; i++) {
-//     let a = prompt('Один из последних просмотренных фильмов?'),
-//         b = prompt('На сколько оцените его?');
+//     let a = prompt('Один из последних просмотренных фильмов?');
+//     let b = prompt('На сколько оцените его?');
 //     if (a == '' || b == '' || a == null || b == null || a.length > 50) {
 //         i--;
 //     }
 //     else {
+//         console.log('error!');
 //         personalMovieDB.movies[a] = b;
 //     }
 // }
@@ -54,15 +57,16 @@ let i = 0;
 
 while (i < 2) {
     let a = prompt('Один из последних просмотренных фильмов?'),
-        b = prompt('На сколько оцените его?');
-        
-    i++;
+        b = prompt('На сколько оцените его?');   
+        i++;
     if (a == '' || b == '' || a == null || b == null || a.length > 50) {
+        console.log('error!');
         i--;
     }
     else {
         personalMovieDB.movies[a] = b;
     }
 }
+
 
 console.log(personalMovieDB);

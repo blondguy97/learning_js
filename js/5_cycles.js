@@ -82,15 +82,15 @@ for (let i = 0; i < 3; i++) {
 
 let result = '';
 
-const len = 7;
+const len = 6;
 
-for (let i = 1; i < len; i++) {
+for (let i = 1; i <= len; i++) {
 
     for (let j = 0; j < i; j++) {
         result = result + '*';
     }
 
-    result += '\n';
+    result = result + '\n';
 }
 
 console.log(result);
@@ -101,10 +101,121 @@ first: for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
         console.log(`second level: ${j}`);
         for (let k = 0; k < 3; k++) {
-            if(k === 2) continue first;
+            if (k === 2) continue first;
             console.log(`third level: ${k}`);
         }
     }
 }
 
+
+// Задачи:
+
+// 1. При помощи цикла выведите числа от 5 до 10 в консоль. 5 и 10 включительно. Цикл можно использовать любой
+
+
+// for (let i = 5; i <= 10; i++) {
+//     console.log(i);
+// }
+
+
+// let i = 5;
+
+// while(i <= 10) {
+//     console.log(i);
+//     i++;
+// }
+
+
+// let i = 5;
+
+// do {
+//     console.log(i);
+//     i++;
+// } while (i <= 10)
+
+
+
+
+// 2. При помощи цикла for вывести числа от 20 до 10 в консоль. В обратном порядке (20, 19, 18...). Когда цикл дойдет до числа 13 - остановить весь цикл
+
+// for (let i = 20; i >= 10; i--) {
+//     console.log(i);
+//     if(i === 13) {
+//         break;
+//     }
+// }
+
+
+// 3. При помощи цикла for выведите чётные числа от 2 до 10 включительно
+
+for (let i = 1; i <= 10; i++) {
+    if (i % 2 !== 0) {
+        continue;
+    }
+    console.log(i);
+}
+
+// 4. Перепишите цикл  for на вариант с while. Результат должен остаться точно таким же. Не создайте бесконечный цикл! Иначе браузер может зависнуть.
+
+//  Цикл, который нужно переписать:
+
+//  for (let i = 2; i <= 16; i++) {
+//      if (i % 2 === 0) {
+//          continue;
+//      } else {
+//          console.log(i);
+//      }
+//  }
+
+// let i = 2;
+
+// while (i < 16) {
+//     i++;
+//     if (i % 2 === 0) {
+//         continue;
+//     } else {
+//         console.log(i);
+//     }
+
+// }
+
+
+
+/* 5. Заполните новый массив (result) числами из старого (arr). Количество элементов в массиве можно получить как arr.length, а к элементам обращаемся все так же: arr[0], arr[1] и тд.
+Должен получиться точно такой же массив 
+
+
+const arr = [3, 5, 8, 16, 20, 23, 5];
+
+const res = [];
+
+for(let i = 0; i < arr.length; i++) {
+    res[i] = arr[i];
+}
+
+console.log(res);
+*/
+
+
+
+/* 6. Измените данный массив так, чтобы все числа были увеличены в 2 раза, а если попадается строка - то к ней было добавлено " - done".
+Для определения типа данных используйте typeof();   
+
+const data = [5, 10, 'Shopping', 20, 'Homework'];
+
+Должно получиться: [ 10, 20, 'Shopping - done', 40, 'Homework - done' ]
+
+const data = [5, 10, 'Shopping', 20, 'Homework'];
+
+for(let i = 0; i < data.length; i++) {
+    if(typeof data[i] === 'number') {
+        data[i] = data[i] * 2;
+    }
+    else if (typeof data[i === 'string']) {
+        data[i] = data[i] + ' - done'
+    }
+}
+
+console.log(data);
+*/
 
