@@ -55,9 +55,11 @@ function detectPersonalLvl() {
 
 function rememberMyMovies() {
     for (let i = 0; i < 2; i++) {
-        let a = prompt('Один из последних просмотренных фильмов?').trim(), 
-            b = prompt('На сколько оцените его?').trim(); 
-            /* метод trim ставим чтобы пользователь не мог ввести одни пробелы и это засчиталось бы за ответ */
+        let a = prompt('Один из последних просмотренных фильмов?'),
+            b = prompt('На сколько оцените его?');
+        a.trim();
+        b.trim();
+        /* метод trim ставим чтобы пользователь не мог ввести одни пробелы и это засчиталось бы за ответ */
         if (a == '' || b == '' || a == null || b == null || a.length > 50) {
             i--;
             console.log('error');
@@ -68,7 +70,7 @@ function rememberMyMovies() {
     }
 }
 
-// rememberMyMovies();
+rememberMyMovies();
 
 /* Аналог цикла в функции rememberMyMovies();
 
@@ -105,13 +107,39 @@ showMyDB(personalMovieDB.privat);
 
 function writeYourGenres() {
     for (let i = 0; i < 3; i++) {
-        personalMovieDB.genres[i] = prompt(`Ваш любимый жанр под номером ${i + 1}`);
+        personalMovieDB.genres[i] = prompt("Ваш любимый жанр под номером  " + (i + 1));
     }
 }
 
-writeYourGenres();
+// writeYourGenres();
 
 
 
+/* Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них. Если один из аргументов не является числом или их меньше 4 - возвращается 0. Дробные числа разрешены.
+
+Пример:
+
+findMaxNumber(1, 5, 6.6, 11); =>  11
+
+findMaxNumber(1, 5, '6', '10');  =>  0
+
+У этой задачи есть очень много вариантов решения, в том числе и встроенное в JS. Подходит любое :)
 
 
+function findMaxNumber(a, b, c, d) {
+    if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+        return 0;
+
+    }
+    else {
+        let more = Math.max(a, b, c, d);
+        return `Самое большое число из: ${a}, ${b}, ${c} и ${d} - это ${more}`;
+    }
+}
+
+
+let res = findMaxNumber(2, 22, 21,8);
+
+console.log(res); 
+
+*/
