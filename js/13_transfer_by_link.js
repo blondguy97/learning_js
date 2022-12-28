@@ -27,7 +27,7 @@ console.log(copyObj); // { a: 10, b: 1 }
 // Способ №1 для создания поверхностного объекта. Цикл for
 
 let num = {
-    a: 2, 
+    a: 2,
     b: 5,
     c: {
         x: 7,
@@ -86,7 +86,7 @@ let smallOb = {
     y: 64
 }
 
-let emptyObj = Object.assign({a: 1},smallOb ); // Так мы можем скопировать какой-либо объект в пустой объект и получить поверхностную копию без всяких циклов
+let emptyObj = Object.assign({ a: 1 }, smallOb); // Так мы можем скопировать какой-либо объект в пустой объект и получить поверхностную копию без всяких циклов
 
 console.log(emptyObj); // X: 245, y: 64
 
@@ -109,7 +109,7 @@ let video = ['youtube', 'vimeo', 'rutube'],
     blogs = ['liveJournal', 'blogger'],
     internet = [...video, ...blogs, 'vk', 'facebook'];
 
-    console.log(internet); /* [
+console.log(internet); /* [
         'youtube',
         'vimeo',
         'rutube',
@@ -120,9 +120,9 @@ let video = ['youtube', 'vimeo', 'rutube'],
       ]
        */
 
-      // spread оператор записывается как троеточние которые пишутся перед массивами или объектами 
+// spread оператор записывается как троеточние которые пишутся перед массивами или объектами 
 
-function log (a, b, c) {
+function log(a, b, c) {
     console.log(a);
     console.log(b);
     console.log(c);
@@ -130,7 +130,7 @@ function log (a, b, c) {
 
 let numbers = [1, 2, 3];
 
-log(...numbers); /* 
+console.log(...numbers); /* 
     1
     2
     3 */
@@ -151,13 +151,13 @@ let oldObj = {
     two: 2
 };
 
-let newObj = {...oldObj};
+let newObj = { ...oldObj };
 
-console.log(newObj);
+console.log(newObj); // Таким образом с помощью спред оператора мы можем создавать поверхностную копию объекта
 
 const someString = 'strsing';
 
-function reverse (string) {
+function reverse(string) {
 
     if (string !== 'string') {
         console.log('error');
@@ -167,6 +167,191 @@ function reverse (string) {
     }
 }
 
-reverse(someString)
+reverse(someString);
 
- 
+
+/* Задачи на работу с объектами
+В этих заданиях мы с вами потренируемся работать с объектами. Это важный навык и нам нужно понимать как работают эти структуры.
+
+
+У вас есть готовый объект с данными. Разработчик Х хочет написать часть функционала, но ему не хватает навыков. Выполните часть заданий за него.
+
+Задачи:
+
+1) Напишите функцию showExperience, которая будет принимать в себя объект со всеми данными и возвращать строку с опытом.
+
+Пример:
+
+showExperience(personalPlanPeter) => '1 month'
+
+P.S. желательно использовать деструктуризацию, но не обязательно
+
+*/
+
+/* ОТВЕТ
+
+const personalPlanPeter = {
+    name: "Peter",
+    age: "29",
+    skills: {
+        languages: ['ru', 'eng'],
+        programmingLangs: {
+            js: '20%',
+            php: '10%'
+        },
+        exp: '12 month'
+    }
+};
+
+function showExperience(plan) {
+    let {exp} = plan.skills;
+    return exp;
+}
+
+let x = showExperience(personalPlanPeter)
+
+console.log(x); */
+
+
+/* 2) Создайте метод showAgeAndLangs внутри объекта personalPlanPeter. При его вызове метод будет принимать в себя объект и возвращать строку в нужном виде.
+
+Пример:
+
+personalPlanPeter.showAgeAndLangs(personalPlanPeter)
+=> 'Мне 29 и я владею языками: RU ENG'
+
+Заметьте, что возраст и языки подставляются автоматически из объекта, а языки всегда в верхнем регистре (большими буквами). Если данные в объекте поменяются, то и сообщение тоже изменится.
+
+P.S. Дальше по курсу мы научимся удобно обращаться из метода к самому объекту, в котором он расположен. Но пока делаем это менее удобным способом)
+
+*/
+
+/* ОТВЕТ
+
+const personalPlanPeter = {
+    name: "Peter",
+    age: "29",
+    skills: {
+        languages: ['ru', 'eng'],
+        programmingLangs: {
+            js: '20%',
+            php: '10%'
+        },
+        exp: '12 month'
+    }
+};
+
+function showAgeAndLangs(plan) {
+    let {age} = plan;
+    let {languages} = plan.skills;
+
+    let str = `Мне ${age} лет и я владею:`;
+
+    languages.forEach(function(lang){
+        str = str + ' ' + lang.toUpperCase();
+    });
+
+   return str;
+}
+
+let res = showAgeAndLangs(personalPlanPeter);
+
+console.log(res); // Мне 29 лет и я владею: RU ENG
+ */
+
+
+/* 
+Задачи на работу с массивами
+В этих заданиях мы с вами потренируемся работать с массивами.
+
+
+Задачи:
+
+1) Напишите функцию showFamily, которая будет принимать в себя массив строк и возвращать сообщение в нужном формате.
+showFamily(family)  => 'Семья состоит из: Peter Ann Alex Linda'
+Имена подставляются автоматически из массива. Если массив пустой, то выводится сообщение 'Семья пуста'
+
+ОТВЕТ
+
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+
+
+function showFamily(fam) {
+
+  let str = '';
+    if (fam.length === 0) {
+        str = 'Семья пуста';
+    }
+    else {
+        str = `Семья состоит из: `;
+    }
+
+
+    fam.forEach(function (item) {
+        str = str + `${item } `;
+
+    });
+
+    return str;
+
+}
+
+let x = showFamily(family);
+
+console.log(x);
+
+*/
+
+
+/*
+2) напишите функцию standardizeStrings, которая будет принимать в себя массив строк и будет выводить в консоль эти строки в нижнем регистре.
+
+Пример:
+
+standardizeStrings(favoriteCities)  выведет в консоль
+
+lisbon
+rome
+milan
+dublin
+
+
+ОТВЕТ
+
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+
+function standardizeStrings(arr) {
+    arr.forEach(function(item) {
+        console.log(item.toLowerCase());
+    });
+}
+
+standardizeStrings(favoriteCities);
+
+ */
+
+
+/* Задача с собеседований. Напишите функцию reverse, которая принимает в себя строку и возвращает эту строку в обратном порядке.
+
+Пример:
+
+const someString = 'This is some strange string';
+reverse(someString) => 'gnirts egnarts emos si sihT'
+
+Функцию можно применить к любой строке. Если в функцию приходит не строка - вернуть сообщение "Ошибка!" */
+
+
+let someShit = 'sd';
+
+function reverse(str) {
+    if (typeof (str) !== 'string') {
+        return 'Error';
+    }
+    else {
+       return str.split('').reverse().join("");
+    }
+}
+
+let res = reverse(someShit);
+
+console.log(res);
