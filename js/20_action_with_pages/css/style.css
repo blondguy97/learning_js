@@ -76,3 +76,12 @@ button {
 	margin-top: 30px;
 	color: #fff;
 }
+
+.triangle {
+   display: flex;
+    max-width: 0;
+	border: 50px solid transparent;
+	border-bottom: 90px solid orange;
+   margin-bottom: 20px;
+}
+

@@ -36,5 +36,16 @@ function createCounter() {
         counter = counter + 1;
         return counter;
     };
+
+    return myFunction;
 }
 
+let increment = createCounter();
+
+let c1 = increment();
+
+let c2 = increment();
+
+let c3 = increment();
+
+console.log(c1, c2, c3);
