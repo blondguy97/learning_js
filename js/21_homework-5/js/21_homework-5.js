@@ -12,44 +12,43 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-'use strict';
+"use strict";
 
-
-let adv = document.querySelectorAll('.promo__adv img');
-let genre = document.querySelector('.promo__genre');
-let bg = document.querySelector('.promo__bg');
-let promoList = document.querySelector('.promo__interactive-list');
-let promoItems = document.querySelectorAll('.promo__interactive-item')
+let adv = document.querySelectorAll(".promo__adv img");
+let genre = document.querySelector(".promo__genre");
+let bg = document.querySelector(".promo__bg");
+let promoList = document.querySelector(".promo__interactive-list");
+let promoItems = document.querySelectorAll(".promo__interactive-item");
 
 bg.style.backgroundImage = 'url("img/bg.jpg")';
 
 adv.forEach(function (item) {
-    item.remove();
+  item.remove();
 });
 
-genre.textContent = 'Драма';
-
+genre.textContent = "Драма";
 
 const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Алтай"
-    ]
+  movies: [
+    "Логан",
+    "Лига справедливости",
+    "Ла-ла лэнд",
+    "Одержимость",
+    "Алтай",
+  ],
 };
-
 
 movieDB.movies.sort();
 
 
-promoList.innerHTML = ''
+
+promoItems.forEach(function(item) {
+    item.remove();
+});
 
 movieDB.movies.forEach(function (film, num) {
-    promoList.innerHTML = promoList.innerHTML + `<li class="promo__interactive-item">${num + 1} ${film}
-                            <div class="delete"></div>
-                            </li>`
-})
-
-
+  promoList.innerHTML =
+    promoList.innerHTML +   `<li class="promo__interactive-item">
+                            ${num + 1} ${film}
+                            <div class="delete"></div></li>`;
+});
