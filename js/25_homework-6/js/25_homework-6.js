@@ -75,35 +75,33 @@ document.addEventListener("DOMContentLoaded", function () {
     form.reset();
   });
 
-
-  
   function createMovieList(films, parent) {
     parent.innerHTML = "";
-    
+
     films.forEach(function (film, num) {
       parent.innerHTML =
-      parent.innerHTML +
-      `<li class="promo__interactive-item">
+        parent.innerHTML +
+        `<li class="promo__interactive-item">
       ${num + 1} ${film}
       <div class="delete"></div>
       </li>`;
     });
-    
-    let delsMovie = document.querySelectorAll(".delete");
-    
-    delsMovie.forEach(function (btn, i) {
+
+    let deleteMovie = document.querySelectorAll(".delete");
+
+    deleteMovie.forEach(function (btn, i) {
       btn.addEventListener("click", function () {
         btn.parentElement.remove();
         movieDB.movies.splice(i, 1);
-        createMovieList(films, parent)
+        createMovieList(films, parent);
       });
     });
-    
-    
   }
-  
+
   deleteAdv(adv);
   makeChanges();
   sortArr(movieDB.movies);
   createMovieList(movieDB.movies, promoList);
 });
+
+
