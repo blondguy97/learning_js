@@ -9,16 +9,13 @@ button {
   cursor: pointer;
   transition: 0.3s;
 }
+
 button:hover {
   transform: scale(0.95);
 }
-.overlay {
-  background-color: pink;
-  width: 200px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
-}
+
+
+
 a {
   display: block;
   margin-top: 30px;
@@ -30,4 +27,51 @@ body {
 
 .black {
   background-color: #000;
+}
+
+
+.red-square {
+  width: 100px;
+  height: 100px;
+  margin: 20px 0;
+  background-color: red;
+}
+
+.purple-square {
+  width: 100px;
+  height: 100px;
+  margin: 20px 0;
+  background-color: rgb(132, 0, 255);
+}
+
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+}
+
+.wrapper {
+  margin: 20px 0;
+  cursor: pointer;
+  padding: 20px;
+  text-align: center;
+  background-color: lightblue;
+}
+
+.link {
+  font-weight: 700;
+  color: black;
+  font-size: 30px;
+  display: block;
+  text-decoration: none;
+  margin: 20px 0;
+  transition: .2s all;
+}
+
+
+.link:hover {
+  text-decoration: underline;
 }

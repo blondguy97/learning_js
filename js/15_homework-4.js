@@ -14,13 +14,12 @@
 
 'use strict';
 
-
 let personalMovieDB = {
-    count: '',
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false,
+    privat: true,
     start: function () {
         personalMovieDB.count = prompt('Сколько фильмов вы уже посмотрели?');
         while (personalMovieDB.count === '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
@@ -30,14 +29,11 @@ let personalMovieDB = {
     detectPersonalLvl: function () {
         if (personalMovieDB.count < 10) {
             alert('Просмотрено довольно мало фильмов');
-        }
-        else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+        } else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
             alert('Вы классический зритель');
-        }
-        else if (personalMovieDB.count > 30) {
+        } else if (personalMovieDB.count > 30) {
             alert('Вы киноман!');
-        }
-        else {
+        } else {
             alert('Ошибка!');
         }
     },
@@ -49,62 +45,110 @@ let personalMovieDB = {
             if (a == '' || b == '' || a == null || b == null || a.length > 50) {
                 i--;
                 console.log('error');
-            }
-            else {
+            } else {
                 personalMovieDB.movies[a] = b;
             }
         }
     },
-    /*  3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
- Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
- при помощи метода forEach вывести в консоль сообщения в таком виде:
- "Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
     writeYourGenres: function () {
-        /*  for (let i = 0; i < 3; i++) {
-            let genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);
+        for (let i = 1; i <= 3; i++) {
+            let genre = prompt(`Ваш любимый жанр под номером ${i}`);
             if (genre == null || genre == '') {
                 i--;
                 alert('Вы ввели ввели неверные данные или отменили действие!');
             } else {
-                personalMovieDB.genres[i] = genre;
-
+                personalMovieDB.genres[i - 1] = genre;
             }
-        } */
-        for (let i = 0; i < 1; i++) {
-            let genre = prompt(`Введите ваши любимые жанры через запятую`);
-            if (genre == null || genre == '') {
-                i--;
-                alert('Вы ввели ввели неверные данные или отменили действие!');
-            } else {
-                personalMovieDB.genres = genre.split(', ');
-            } // Более усовершенствованная версия цикла, с добавлением метода строк split который преобразует слова в массив
         }
-        personalMovieDB.genres.forEach(function (item, i) {
-            console.log(`Любимый жанр ${i + 1} - это ${item}`);
+
+        personalMovieDB.genres.forEach(function (item, i, arr) {
+            console.log(`Любимый жанр под номером ${i + 1} - это ${item} из массива ${arr}`);
         });
     },
     showMyDB: function () {
         if (personalMovieDB.privat) {
             console.log('Приватно');
-        }
-        else {
+        } else {
             console.log(personalMovieDB);
         }
     },
     toggleVisibleMyDB: function () {
         if (personalMovieDB.privat) {
             personalMovieDB.privat = false;
-        }
-        else {
+        } else {
             personalMovieDB.privat = true;
         }
     }
 };
 
-console.log(personalMovieDB);
 
 
+/* Задача:
 
+Задача:
 
+    У вас есть список учеников, которые хотят поиграть в игру:
 
+    const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+Но команд может быть только 3 по 3 человека.Напишите функцию sortStudentsByGroups, которая принимает в себя массив строк.
+
+Внутри она сначала сортирует имена по алфавиту.Затем распределяет учеников по 3 человека в 3 группы по алфавитному порядку.Эти группы должны быть массивами.Как итог, функция возвращает новый массив с тремя командами и строкой как 4 й элемент.
+
+Пример:
+
+    sortStudentsByGroups(students) =>
+
+    [
+        ['Andrew', 'Ann', 'Bernard'],
+        ['Cris', 'Josh', 'Mark'],
+        ['Peter', 'Sam', 'Sandra'],
+        'Оставшиеся студенты: Takesi'
+    ]
+Если убрать одно студента из списка, то результат будет:
+
+    [
+        ['Andrew', 'Ann', 'Bernard'],
+        ['Cris', 'Josh', 'Mark'],
+        ['Peter', 'Sam', 'Sandra'],
+        'Оставшиеся студенты: -'
+    ]
+А если добавить одного, то:
+
+    [
+        ['Andrew', 'Ann', 'Bernard'],
+        ['Cris', 'Josh', 'Mark'],
+        ['Peter', 'Sam', 'Sandra'],
+        'Оставшиеся студенты: Takesi, Somebody'
+    ]
+То есть, меняется содержимое строки. Все оставшиеся ученики попадают туда.
+
+Задача интересная, немного заковыристая, но все необходимое для неё мы уже проходили.Просто распишите логику действий строка за строкой.*/
+
+const students = ['Peter', 'andrew', 'Baba', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'takeda', 'kenshi'];
+
+function sortStudentsByGroups(arr) {
+
+    arr.sort();
+
+    let a = [];
+    let b = [];
+    let c = [];
+    let rest = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (i < 3) {
+            a.push(arr[i]);
+        } else if (i < 6) {
+            b.push(arr[i]);
+        } else if (i < 9) {
+            c.push(arr[i]);
+        } else {
+            rest.push(arr[i]);
+        }
+    }
+
+    return [a, b, c, rest.join(', ')];
+}
+
+console.log(sortStudentsByGroups(students));

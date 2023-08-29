@@ -31,15 +31,21 @@ let personalMovieDB = {
     movies: {},
     actors: {},
     genres: [],
-    privat: false
+    privat: false,
 };
 
-const a = prompt ('Один из последних просмотренных фильмов?'),
-      c = prompt ('На сколько оцените его?'),
-      b = prompt ('Один из последних просмотренных фильмов?'),
-      d = prompt ('На сколько оцените его?');
 
-personalMovieDB.movies[a] = c; 
-personalMovieDB.movies[b] = d; // При записи данных в объект в формате ключ - значение, лучше использовать квадратные скобки, а не точку
+
+
+
+let movie_1 = prompt('Один из последних просмотренных фильмов?');
+let score_1 = prompt('На сколько оцените его?');
+let movie_2 = prompt('Один из последних просмотренных фильмов?');
+let score_2 = prompt('Один из последних просмотренных фильмов?');
+
+
+
+personalMovieDB.movies[movie_1] = score_1;
+personalMovieDB.movies[movie_2] = score_2;
 
 console.log(personalMovieDB);

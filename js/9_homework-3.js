@@ -23,7 +23,7 @@ function start() {
     }
 }
 
-// start();
+start();
 
 
 let personalMovieDB = {
@@ -50,7 +50,7 @@ function detectPersonalLvl() {
     }
 }
 
-// detectPersonalLvl();
+detectPersonalLvl();
 
 
 function rememberMyMovies() {
@@ -92,7 +92,6 @@ while (i < 2) {
 
 
 
-
 function showMyDB(close) {
     if (close) {
         console.log('Приватно');
@@ -111,7 +110,7 @@ function writeYourGenres() {
     }
 }
 
-// writeYourGenres();
+writeYourGenres();
 
 
 
@@ -143,3 +142,14 @@ let res = findMaxNumber(2, 22, 21,8);
 console.log(res); 
 
 */
+
+/* Подробнее про метод у строк trim()
+
+Метод trim() удаляет пробельные символы с начала и конца строки.
+
+*/
+
+
+console.log('    '.trim()); // То есть в этом случае если пользователь где то введет только одни пробелы, либо придет некорректный ответ от сервера, то нигде это не засчитается, будет считаться что тут НИЧЕГО, пустая строка (а в js надо помнить, то если в строке хоть пробел есть Это УЖЕ НЕ пустая строка)
+
+
