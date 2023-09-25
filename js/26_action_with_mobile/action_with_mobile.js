@@ -44,6 +44,16 @@ document.addEventListener('DOMContentLoaded', () => { // Нужно чтобы �
         event.preventDefault();
         console.log('Cancel');
     });
+
+    box.addEventListener('touchenter', (event) => {
+        event.preventDefault();
+        console.log('touchenter');
+    });
+
+    box.addEventListener('touchleave', (event) => {
+        event.preventDefault();
+        console.log('touchleave');
+    });
 });
 
 // У объекта события есть 3 основных метода для работы с касаниями на 

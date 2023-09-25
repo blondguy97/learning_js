@@ -15,93 +15,149 @@ P.S. Здесь есть несколько вариантов решения з
 
 5) Фильмы должны быть отсортированы по алфавиту */
 
-"use strict";
+'use strict';
 
-document.addEventListener("DOMContentLoaded", function () {
-  let adv = document.querySelectorAll(".promo__adv img");
-  let genre = document.querySelector(".promo__genre");
-  let bg = document.querySelector(".promo__bg");
-  let promoList = document.querySelector(".promo__interactive-list");
 
-  let form = document.querySelector("form.add");
-  let input = form.querySelector(".adding__input");
-  let checkBox = form.querySelector('[type="checkbox"]');
+document.addEventListener('DOMContentLoaded', function () {
 
-  let movieDB = {
-    movies: [
-      "Логан",
-      "Лига справедливости",
-      "Ла-ла лэнд",
-      "Одержимость",
-      "Алтай",
-    ],
-  };
+    /* Вот пара важных событий документа(то есть всей страницы) которые часто будут нужны:
+    
+    1) DOMContentLoaded – браузер полностью загрузил HTML, было построено DOM-дерево, но внешние ресурсы, такие как картинки <img> и стили, могут быть ещё не загружены.
+    2) load – браузер загрузил HTML и внешние ресурсы (картинки, стили и т.д.).
+    
+    
+    Событие DOMContentLoaded – DOM готов, так что обработчик может искать DOM - узлы и инициализировать интерфейс.
+    Событие load – внешние ресурсы были загружены, стили применены, размеры картинок известны и т.д.
+    
+    
+    */
 
-  function deleteAdv(advertisement) {
-    advertisement.forEach(function (item) {
-      item.remove();
-    });
-  }
+    let ads = document.querySelectorAll(".promo__adv img, .promo__adv-title");
+    let genre = document.querySelector(".promo__genre");
+    let bg = document.querySelector(".promo__bg");
+    let promoList = document.querySelector(".promo__interactive-list");
+    let promoItems = document.querySelectorAll(".promo__interactive-item");
+    let checkbox = document.querySelector('input[type="checkbox"]');
+    let form = document.querySelector('form.add');
+    let input = document.querySelector('.adding__input');
 
-  function makeChanges() {
-    bg.style.backgroundImage = 'url("img/bg.jpg")';
-    genre.textContent = "Драма";
-  }
 
-  function sortArr(arr) {
-    arr.sort();
-  }
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    const movieDB = {
+        movies: [
+            "Анатолий",
+            "Лига справедливости",
+            "Ла-ла лэнд",
+            "Амбар",
+            "Скотт Пилигрим против..."
+        ]
+    };
 
-    let newMovie = input.value.trim();
-    let favorite = checkBox.checked;
 
-    if (newMovie) {
-      if (newMovie.length > 21) {
-        newMovie = newMovie.slice(0, 21) + "...";
-      }
 
-      if (favorite) {
-        console.log("Сделать любимым");
-      }
 
-      movieDB.movies.push(newMovie);
-      sortArr(movieDB.movies);
-      createMovieList(movieDB.movies, promoList);
+
+
+    function deleteAds(advertisements) {
+        advertisements.forEach(function (item) {
+            item.remove();
+        });
+
+        /* ИЛИ
+            for (let i = 0; i < advertisements.length; i++) {
+                advertisements[i].remove();
+            }
+        */
+
     }
 
-    form.reset();
-  });
-
-  function createMovieList(films, parent) {
-    parent.innerHTML = "";
-
-    films.forEach(function (film, num) {
-      parent.innerHTML =
-        parent.innerHTML +
-        `<li class="promo__interactive-item">
-      ${num + 1} ${film}
-      <div class="delete"></div>
-      </li>`;
-    });
-
-    let deleteMovie = document.querySelectorAll(".delete");
-
-    deleteMovie.forEach(function (btn, i) {
-      btn.addEventListener("click", function () {
-        btn.parentElement.remove();
-        movieDB.movies.splice(i, 1);
-        createMovieList(films, parent);
-      });
-    });
-  }
-
-  deleteAdv(adv);
-  makeChanges();
-  sortArr(movieDB.movies);
-  createMovieList(movieDB.movies, promoList);
-});
 
 
+
+
+
+    function makeChanges() {
+        genre.textContent = "Драма";
+        bg.style.backgroundImage = 'url("img/bg.jpg")';
+    }
+
+
+
+    function movieSort(movies) {
+        movies.sort();
+    }
+
+
+
+    function createMovieList(films, parent) {
+
+        while (films.firstChild) {
+            films.removeChild(films.firstChild);
+        }
+
+        movieSort(parent)
+
+
+        parent.forEach(function (item, num) {
+            films.innerHTML = films.innerHTML +
+                `<li class="promo__interactive-item">
+                    ${num + 1}. ${item}
+                        <div class="delete"></div>
+                    </li>`;
+        });
+
+        document.querySelectorAll('.delete').forEach(function (btn, i) {
+            btn.addEventListener('click', function () {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i, 1);
+
+                createMovieList(promoList, movieDB.movies)
+            })
+        })
+
+    }
+
+
+
+
+
+
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault()
+
+        let newFilm = input.value;
+        let favMovie = checkbox.checked;
+
+        if (newFilm) {
+
+            if (newFilm.length > 20) {
+                newFilm = `${newFilm.slice(0, 20)}...`
+            }
+            movieDB.movies.push(newFilm);
+            movieSort(movieDB.movies)
+
+
+
+        }
+        createMovieList(promoList, movieDB.movies)
+
+
+        if (favMovie) {
+            console.log(`${newFilm} выбран одним из любимых фильмов`);
+        }
+
+        event.target.reset();
+
+
+    })
+
+
+
+
+    deleteAds(ads)
+    makeChanges()
+    createMovieList(promoList, movieDB.movies)
+
+
+})

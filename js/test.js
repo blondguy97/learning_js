@@ -1,51 +1,56 @@
 'use strict';
 
+function pow(x, n) {
+    if (n === 1) {
+        return x
+    } else {
+        return x * pow(x, n - 1)
+    }
 
-const restorantData = {
-    menu: [{
-            name: 'Salad Caesar',
-            price: '14$'
-        },
-        {
-            name: 'Pizza Diavola',
-            price: '9$'
-        },
-        {
-            name: 'Beefsteak',
-            price: '17$'
-        },
-        {
-            name: 'Napoleon',
-            price: '7$'
-        }
-    ],
-    waitors: [{
-        name: 'Alice',
-        age: 22
-    }, {
-        name: 'John',
-        age: 24
-    }],
-    averageLunchPrice: '20$',
-    openNow: false
-};
-
-
-function transferWaitors(data) {
-    let copy = Object.assign({}, data);
-
-    copy.waitors = [{
-        name: 'Mike',
-        age: 23
-    }, {
-        name: 'John',
-        age: 24
-    }];
-    return copy;
 }
 
-console.log(transferWaitors(restorantData));
+console.log(pow(2, 3)); 
 
-console.log(restorantData);
+
+function factorial(n) {
+    if (isNaN(n) || !Number.isInteger(n)) {
+        console.log('Вы ввели число или не целое число');
+    }
+    else if (n === 0) {
+        return 1
+    }
+
+    else {
+        return n * factorial(n - 1)
+    }
+}
+
+console.log(factorial(3));  
+
+
+
+
+/* Распишем эту функцию с рекурсией детально. По итерациям
+
+1) Контекст x = 2, n = 4. Остановились на строке 7  
+В if не попадаем так как n не равно одному
+
+2) Контекст x = 2, n = 3. Так как мы на 7 строке передали n - 1. 
+Остановились на строке 7. В if также не попадаем так как n не равно одному
+
+
+3) Контекст x = 2, n = 2. Остановились на строке 7. 
+В if также не попадаем так как n не равно одному
+
+3) Контекст x = 2, n = 1. Остановились на строке 5. 
+Возвращаем значение if, так как n равно одному. В этот раз мы не перешли в рекурсию 
+Когда мы вернули x, мы пошли вверх по стеку вызовов закрывать наши контексты
+
+
+
+
+
+*/
+
 
 
