@@ -126,14 +126,17 @@ console.log(internet);
 // spread оператор записывается как троеточние которые пишутся перед массивами или объектами 
 
 function log(a, b, c) {
-    console.log(a);
-    console.log(b);
-    console.log(c);
+    console.log(`1 число это ${a}` );
+    console.log(`2 число это ${b}`);
+    console.log(`3 число это ${c}`);
 }
 
-let numbers = [1, 2, 3];
 
-console.log(...numbers);
+let numbers = ['я', "она", "он", "они"];
+
+numbers.reverse()
+
+log(...numbers)
 /* 
    1
    2
