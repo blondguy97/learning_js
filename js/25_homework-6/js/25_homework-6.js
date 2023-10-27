@@ -111,7 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 btn.parentElement.remove();
                 movieDB.movies.splice(i, 1);
 
-                createMovieList(promoList, movieDB.movies)
+                createMovieList(promoList, movieDB.movies);
+                /* Применяем рекурсию и после клика по корзине, удаляем родительский элемент со страницы и этот элемент из массива, и заново строим список через функцию createMovieList вызывая эту функцию саму в себе с передачей аргументов, и теперь список будет каждый раз актуальным при удалении элементов */
             })
         })
 

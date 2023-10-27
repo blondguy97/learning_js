@@ -136,8 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalWindow.classList.add('show');
         document.body.style.overflow = 'hidden'; // не позволяем прокручиваться странице пока модальное окно включено 
 
-
-        clearTimeout(modalTimerId);
+        clearTimeout(modalTimerId); /* Добавляем отключения автовыскакивания модального окна при условии что пользователь открыл его вручную */
 
 
     } /* Запихиваем весь фунционал открытия модального окна в отдельную функцию чтобы не повторять код постоянно */
@@ -179,13 +178,81 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Часто бывает что нужно чтобы модалка вызывалась через какое то время проведенное на странице */
 
-    const modalTimerId = setTimeout(openModal, 5000);
+    // const modalTimerId = setTimeout(openModal, 5000);
+
+
     /*  Модалка откроется самостоятельно через 5 секунд, после того как пользователь зашел на сайт.
        
     
        Но если пользователь сам кликнул на модалку перед тем как она автоматически открылась и уже посмотрел что там, то мы можем отменить действия setTimeout прописав в функции открытия модалки clearTimeout(modalTimerId);
     */
 
- 
+
+
+    // Classes for cards
+
+    class MenuCard {
+        constructor(src, alt, title, descr, price, parentSelector) {
+            /* Добавляем в конструктор все данные которые есть в карточке, то есть путь к картинке, ее альт, заголовок карточки, ее описание и цену */
+            this.src = src;
+            this.alt = alt;
+            this.title = title;
+            this.descr = descr;
+            this.parent = document.querySelector(parentSelector); // Этим свойством будем вызывать селектор-родитель внутрь которого мы будем помещать карточку
+            this.price = price;
+            this.staticPriceOfGrivna = 27; // статическая цена гривны к доллару
+            this.changeToGrivna() // Вызываем метод (который мы прописали ниже), прямо в конструкторе, благодаря чему в this.price падает уже модифицированное значение
+
+        }
+
+        changeToGrivna() { // метод, для конвертации долларов в гривны
+            this.price = this.price * this.staticPriceOfGrivna;
+        }
+
+        render() { // Вызовом метода render мы будем создавать html структуру который будет помещаться в определенный div
+            const card = document.createElement('div'); /* Почему мы нашу всю верстку будем добавлять в отельный div, расскажут потом */
+            card.innerHTML =
+                `
+
+               <div class="menu__item">
+                    <img src=${this.src} alt=${this.alt}>
+                    <h3 class="menu__item-subtitle">${this.title}</h3>
+                    <div class="menu__item-descr">${this.descr}</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    </div>
+                </div>
+
+            `;
+            this.parent.append(card); // Добавляем карточку в конец родителя
+        }
+    }
+
+
+    /* Можно сделать так, создать переменную, в нее записать класс, с параметрами, затем на переменной вызвать метод render() */
+
+    const dinamicCard = new MenuCard(
+        `img/tabs/elite.jpg`,
+        `dinamic`,
+        `Меню "Динамическое"`,
+        `Меню "Динамическое" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
+        4,
+        `.menu .container`);
+
+    dinamicCard.render();
+
+
+
+    /* А можем напрямую вызвать метод render у класса menuCard если нам нужно использовать его "на месте", он используется и исчезнет и если нам не надо на него никаких ссылок в будущем, */
+
+    new MenuCard(
+        `img/tabs/elite.jpg`,
+        `dinamic`,
+        `Меню "Динамическое"`,
+        `Меню "Динамическое" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
+        4,
+        `.menu .container`).render();
 
 })
