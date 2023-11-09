@@ -18,3 +18,9 @@ let obj = {
 
 sayName.call(obj);
 
+let out = document.querySelector('.out');
+
+
+
+
+

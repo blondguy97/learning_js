@@ -258,4 +258,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-})
+
+
+    // POST запросы для отправки данных на сервер с форм которые есть в верстке
+
+    /* POST запросы делаются уже с помощью настоящих или локальных серверов */
+
+    const forms = document.querySelectorAll('form');
+
+    /* Задача взять все формы на странице и из них отправлять 
+    данные к файлу server.php */
+
+    const message = {
+        loading: 'Загрузка',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
+    } // В объекте будет список фраз, которые мы будем показывать в форме в различных ситуациях
+
+
+    forms.forEach(function(item) {
+       postData(item) 
+    });
+
+
+    function postData(form) { // функция будет отвечать за постинг данных 
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Отменяет перезагрузку страницы при отправке формы
+
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const request = new XMLHttpRequest();
+
+            request.open('POST', '../server.php') // передаем метод передачи, и тот путь на который будет ссылаться
+
+            request.setRequestHeader('Content-type', 'multipart/form-data')
+
+            const formData = new FormData(form);
+            /* FormData спец объект который позволяет с определенной формы сформировать все данные который заполнил пользователь, то есть ключ значения, в скобки передаем ту форму из которой нам нужно собрать данные, в инпутах нужно обязательно указывать атрибут name  */
+
+            request.send(formData);
+
+            request.addEventListener('load', function () {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMessage.textContent = message.success;
+                } else {
+                    statusMessage.textContent = message.failure;
+
+                }
+            })
+        });
+    }
+});
