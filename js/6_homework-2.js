@@ -43,14 +43,14 @@ console.log(personalMovieDB);
 
 
 for (let i = 0; i < 2; i++) {
-    let a = prompt('Один из последних просмотренных фильмов?');
-    let b = prompt('На сколько оцените его?');
-    if (a == '' || b == '' || a == null || b == null || a.length > 50) {
+    let movie = prompt('Один из последних просмотренных фильмов?');
+    let score = prompt('На сколько оцените его?');
+    if (movie == '' || score == '' || movie == null || score == null || movie.length > 50) {
         i--;
-    }
-    else {
         console.log('error!');
-        personalMovieDB.movies[a] = b;
+    }
+    else {        
+        personalMovieDB.movies[movie] = score;
     }
 }
 

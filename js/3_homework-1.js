@@ -41,11 +41,11 @@ let personalMovieDB = {
 let movie_1 = prompt('Один из последних просмотренных фильмов?');
 let score_1 = prompt('На сколько оцените его?');
 let movie_2 = prompt('Один из последних просмотренных фильмов?');
-let score_2 = prompt('Один из последних просмотренных фильмов?');
+let score_2 = prompt('На сколько оцените его?');
 
 
 
 personalMovieDB.movies[movie_1] = score_1;
-personalMovieDB.movies[movie_2] = score_2;
+personalMovieDB.movies[movie_2] = score_2; // Синтаксис записи свойств через квадратные скобки намного надежнее чем через точку
 
 console.log(personalMovieDB);
