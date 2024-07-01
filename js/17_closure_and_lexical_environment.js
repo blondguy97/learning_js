@@ -59,8 +59,6 @@ logNumber_2(); /*  6.  */
 
 
 
-
-
 function createCounter() {
     let counter = 0;
 
@@ -75,9 +73,7 @@ function createCounter() {
 let increment = createCounter();
 
 let c1 = increment();
-
 let c2 = increment();
-
 let c3 = increment();
 
 console.log(c1, c2, c3);

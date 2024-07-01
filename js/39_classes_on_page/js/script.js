@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     */
 
-    const deadLine = 'Dec 25, 2023, 00:00'; /* Инициализируем дедлайн, допустим 25 декабря 2023 */
+    const deadLine = 'Mar 12, 2025, 00:00'; /* Инициализируем дедлайн, допустим 25 декабря 2023 */
 
     function getTimeRemaining(endTime) { // Создаем функцию для определения разницы во временем между нашим текущим временем и дедлайном
 
@@ -199,21 +199,21 @@ document.addEventListener('DOMContentLoaded', function () {
             this.title = title;
             this.descr = descr;
             this.parent = document.querySelector(parentSelector); // Этим свойством будем вызывать селектор-родитель внутрь которого мы будем помещать карточку
-            this.price = price;
-            this.staticPriceOfGrivna = 27; // статическая цена гривны к доллару
-            this.changeToGrivna() // Вызываем метод (который мы прописали ниже), прямо в конструкторе, благодаря чему в this.price падает уже модифицированное значение
+            this.price = price.toFixed(1);
+            this.staticPriceOfRUB = 70; // статическая цена рубля к доллару
+            this.changeToRUB() // Вызываем метод (который мы прописали ниже), прямо в конструкторе, благодаря чему в this.price падает уже модифицированное значение
 
         }
 
-        changeToGrivna() { // метод, для конвертации долларов в гривны
-            this.price = this.price * this.staticPriceOfGrivna;
+        changeToRUB() { // метод, для конвертации долларов в рубли
+            this.price = Number(this.price) * this.staticPriceOfRUB;
         }
 
         render() { // Вызовом метода render мы будем создавать html структуру который будет помещаться в определенный div
             const card = document.createElement('div'); /* Почему мы нашу всю верстку будем добавлять в отельный div, расскажут потом */
             card.innerHTML =
-                `
 
+            `
                <div class="menu__item">
                     <img src=${this.src} alt=${this.alt}>
                     <h3 class="menu__item-subtitle">${this.title}</h3>
@@ -221,10 +221,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="menu__item-divider"></div>
                     <div class="menu__item-price">
                         <div class="menu__item-cost">Цена:</div>
-                        <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                        <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
                     </div>
                 </div>
-
             `;
             this.parent.append(card); // Добавляем карточку в конец родителя
         }
@@ -236,9 +235,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const dinamicCard = new MenuCard(
         `img/tabs/elite.jpg`,
         `dinamic`,
-        `Меню "Динамическое"`,
-        `Меню "Динамическое" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
-        4,
+        `Меню "Динамическое №1"`,
+        `Меню "Динамическое №1" - Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
+        44,
         `.menu .container`);
 
 
@@ -251,11 +250,23 @@ document.addEventListener('DOMContentLoaded', function () {
     new MenuCard(
         `img/tabs/elite.jpg`,
         `dinamic`,
-        `Меню "Динамическое"`,
-        `Меню "Динамическое" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
-        4,
+        `Меню "Динамическое №2"`,
+        `Меню "Динамическое №2" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
+        6,
         `.menu .container`).render();
 
 
+    new MenuCard(
+        `img/tabs/elite.jpg`,
+        `dinamic`,
+        `Меню "Динамическое №3"`,
+        `Меню "Динамическое №3" -  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro id, sunt ea obcaecati temporibus modi libero itaque vel, qui quidem repellendus quo? Nulla mollitia esse, ut dolor deleniti eligendi hic.`,
+        36,
+        `.menu .container`,
+).render();
 
-})
+
+
+}); // Конец всего кода
+
+

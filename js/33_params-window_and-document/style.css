@@ -2,7 +2,8 @@
   box-sizing: border-box;
   width: 400px;
   height: 350px;
-  overflow: scroll;
+  overflow-y: scroll;
+  display: block;   
   margin: 0 auto;
   margin-top: 50px;
   padding: 10px;

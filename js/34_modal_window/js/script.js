@@ -180,12 +180,27 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Часто бывает что нужно чтобы модалка вызывалась через какое то время проведенное на странице */
 
     const modalTimerId = setTimeout(openModal, 5000);
+
+
+
     /*  Модалка откроется самостоятельно через 5 секунд, после того как пользователь зашел на сайт.
        
     
        Но если пользователь сам кликнул на модалку перед тем как она автоматически открылась и уже посмотрел что там, то мы можем отменить действия setTimeout прописав в функции открытия модалки clearTimeout(modalTimerId);
     */
 
- 
+    function showModalByScroll() {
+
+
+        if ((window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
+            openModal()
+
+            document.removeEventListener('scroll', showModalByScroll)
+        }
+
+    }
+
+    document.addEventListener('scroll', showModalByScroll);
+
 
 })

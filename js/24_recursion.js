@@ -40,7 +40,7 @@ function pow_2(x, n) {
 
 // В этой функции происходит рекурсия, тут функция вызывает саму себя в себе же
 
-console.log(pow_2(2, 3));
+console.log(pow_2(2, 2)); // 4
 
 
 
@@ -93,6 +93,8 @@ let students = {
     }
 };
 
+console.log(Object.values(students));
+
 
 /* Например у нас есть задача посчитать весь прогресс во всех массивах и объектах в этом большом объекте students, то есть объединить все цифры из свойств progress. Для этого можно воспользоватьcя либо циклом либо рекурсией   
 
@@ -137,6 +139,7 @@ const object1 = {
     b: 42,
     c: false,
 };
+
 
 console.log(Object.values(object1)); // ["somestring", 42, false]
 

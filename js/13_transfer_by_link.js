@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 let a = 5;
-let b = a;
+let b = a; // В переменной "b" теперь также как и в переменной "a" теперь значение 5
 
 b = b + 5;
 
@@ -9,16 +9,16 @@ console.log(a); // 5
 console.log(b); // 10
 
 const obj = {
-    a: 5,
-    b: 1
+	a: 5,
+	b: 1,
 };
 
 const copyObj = obj; // в copyObj передается ссылка на объект obj
 
-copyObj.a = 10; // Меням одновременно и в obj, и в copyObj
+copyObj.a = 10; // свойство "a" Меняется одновременно и в obj, и в copyObj
 
-console.log(obj); // { a: 10, b: 1 } 
-console.log(copyObj); // { a: 10, b: 1 } 
+console.log(obj); // { a: 10, b: 1 }
+console.log(copyObj); // { a: 10, b: 1 }
 
 /* суть в том что изменили мы как бы свойство копии объекта, а если посмотреть и то и другое, изменились сразу оба объекта, и оригинал и копия. Это называется передача по ссылке. Изменяя что-то внутри copyObj мы модифицируем наш изначальный объект obj */
 
@@ -26,92 +26,88 @@ console.log(copyObj); // { a: 10, b: 1 }
 
 // Способ №1 для создания поверхностного объекта. Цикл for
 
-let num = {
-    a: 2,
-    b: 5,
-    c: {
-        x: 7,
-        y: 4
-    }
+let nums = {
+	a: 2,
+	b: 5,
+	c: {
+		x: 7,
+		y: 4,
+	},
 };
 
 function copy(mainObj) {
-    let newObj = {};
+	let newObj = {};
 
-    for (let key in mainObj) {
-        newObj[key] = mainObj[key];
-    }
+	for (let key in mainObj) {
+		newObj[key] = mainObj[key];
+	}
 
-    return newObj;
+	return newObj;
 }
 
+let newNums = copy(nums); // Передаем переменной newNums функцию с аргументом num которая возвращает скопированный объект
 
-let newNum = copy(num); // Передаем переменной newNum функцию с аргументом num которая возвращает скопированный объект
+newNums.a = 10; // поменяется только в newNums, в num все останется прежним, значит мы создали абсолютно новую независимую копию объекта?
 
-newNum.a = 10; // поменяется только в newNum, в num все останется прежним, значит мы создали абсолютно новую независимую копию объекта?
+console.log(newNums);
 
-newNum.c.x = 14; // НЕТ. Как и раньше поменяется и там и там, потому что выше мы сделали ПОВЕРХНОСТНУЮ копию объекта
+console.log(nums);
+
+newNums.c.x = 14; // НЕТ. Как и раньше поменяется и там и там, потому что выше мы сделали ПОВЕРХНОСТНУЮ копию объекта
 /*  Таким образом мы создали копию объекта, которые друг от друга ПОЧТИ независят, но все же если мы поменяем вложенный объекта, поменяется и в оригинале. потому что мы создали ПОВЕРХНОСТНУЮ копию объекта. То есть мы можем менять только те свойства, которые лежат на первом уровне, нzо вложенные объекты в объект, мы затронуть не сможем, там опять же останется ссылочный тип данных. А есть еще и ГЛУБОКИЕ копии, о них позже*/
-
-
-console.log(newNum);
-
-console.log(num);
-
-
 
 // Способ №2 для создания поверхностного объекта. Метод assign
 
 let smallObj = {
-    X: 245,
-    y: 64
+	X: 245,
+	y: 64,
 };
 
 let bigObj = {
-    a: 17,
-    b: 20,
-    c: 30,
-    d: 22,
-    e: 33,
-    f: 12
+	a: 17,
+	b: 20,
+	c: 30,
+	d: 22,
+	e: 33,
+	f: 12,
 };
 
 let newBigObj = Object.assign(smallObj, bigObj); // С помощью метода assign объекта Object, мы можем скрестить два объекта, первый аргумент тот который надо копировать, второй КУДА копировать. Если что создается также ПОВЕРХНОСТНАЯ КОПИЯ ОБЪЕКТА
 
 console.log(newBigObj); // Все свойства из одного и из другого объектов
 
-
 let smallOb = {
-    X: 245,
-    y: 64
+	X: 245,
+	y: 64,
 };
 
-let emptyObj = Object.assign({
-    a: 1
-}, smallOb); // Так мы можем скопировать какой-либо объект в пустой объект и получить поверхностную копию без всяких циклов
+let emptyObj = Object.assign({ a: 1 }, smallOb); // Так мы можем скопировать какой-либо объект в пустой объект и получить поверхностную копию без всяких циклов
 
 console.log(emptyObj); // X: 245, y: 64
 
 // МАССИВЫ
 
-let oldArr = ['a', 'b', 'c'];
+let oldArr = ["a", "b", "c"];
 
 let newArr = oldArr.slice(); // Уже знакомым нам методом мы можем очень легко сделать поверхностную копию объекта
 
-newArr[0] = 'z';
+console.log(newArr); // ['a', 'b', 'c']
+console.log(newArr.length); // 3
 
-console.log(newArr); // [ 'z', 'b', 'c' ]
+newArr[0] = "new element";
+
+console.log(newArr); // [ 'new element', 'b', 'c' ]
 console.log(oldArr); // [ 'a', 'b', 'c' ]
-
 
 // spread оператор
 
+let video = ["youtube", "vimeo", "rutube"];
+let blogs = ["wordpress", "liveJournal", "blogger"];
 
-let video = ['youtube', 'vimeo', 'rutube'],
-    blogs = ['liveJournal', 'blogger'],
-    internet = [...video, ...blogs, 'vk', 'facebook'];
+let internet = [...video, ...blogs, "vk", "facebook"];
 
 console.log(internet);
+
 /* [
        'youtube',
        'vimeo',
@@ -123,59 +119,52 @@ console.log(internet);
      ]
       */
 
-// spread оператор записывается как троеточние которые пишутся перед массивами или объектами 
+// spread оператор записывается как троеточние которые пишутся перед массивами или объектами
 
 function log(a, b, c) {
-    console.log(`1 число это ${a}` );
-    console.log(`2 число это ${b}`);
-    console.log(`3 число это ${c}`);
+	console.log(`1 число это ${a}`);
+	console.log(`2 число это ${b}`);
+	console.log(`3 число это ${c}`);
 }
 
+let numbers = ["я", "он", "она"];
 
-let numbers = ['я', "она", "он", "они"];
-
-numbers.reverse()
-
-log(...numbers)
+log(...numbers); 
 /* 
-   1
-   2
-   3 */
+
+1 число это я
+2 число это он
+3 число это она 
+
+*/
+log(...numbers); 
+
+
+numbers.reverse();
 
 // spread оператор может и так работать, в аргументы к функции раскладывать при помощи троеточия например массив
 
 // Способ №3 для создания поверхностного объекта. spread оператор
 
-let array = ['a', 'b'];
+let array = ["a", "b"];
 
 let newArray = [...array];
 
 console.log(newArray); // [ 'a', 'b' ]
 
-
 let oldObj = {
-    one: 1,
-    two: 2
+	one: 1,
+	two: 2,
 };
 
 let newObj = {
-    ...oldObj
+	...oldObj,
 };
 
 console.log(newObj); // Таким образом с помощью спред оператора мы можем создавать поверхностную копию объекта
 
-const someString = 'strsing';
 
-function reverse(string) {
 
-    if (string !== 'string') {
-        console.log('error');
-    } else {
-        console.log(string.split('').reverse().join(''));
-    }
-}
-
-reverse(someString);
 
 
 /* Задачи на работу с объектами
@@ -219,7 +208,6 @@ function showExperience(plan) {
 let x = showExperience(personalPlanPeter)
 
 console.log(x); */
-
 
 /* 2) Создайте метод showAgeAndLangs внутри объекта personalPlanPeter. При его вызове метод будет принимать в себя объект и возвращать строку в нужном виде.
 
@@ -267,7 +255,6 @@ let res = showAgeAndLangs(personalPlanPeter);
 console.log(res); // Мне 29 лет и я владею: RU ENG
  */
 
-
 /* 
 Задачи на работу с массивами
 В этих заданиях мы с вами потренируемся работать с массивами.
@@ -310,7 +297,6 @@ console.log(x);
 
 */
 
-
 /*
 2) напишите функцию standardizeStrings, которая будет принимать в себя массив строк и будет выводить в консоль эти строки в нижнем регистре.
 
@@ -338,25 +324,23 @@ standardizeStrings(favoriteCities);
 
  */
 
-
 /* Задача с собеседований. Напишите функцию reverse, которая принимает в себя строку и возвращает эту строку в обратном порядке.
 
 Пример:
 
-const someString = 'This is some strange string';
+const someString = 'palindrome';
 reverse(someString) => 'gnirts egnarts emos si sihT'
 
 Функцию можно применить к любой строке. Если в функцию приходит не строка - вернуть сообщение "Ошибка!" */
 
-
-let someShit = 'This is some strange string';
+let someShit = "palindrome";
 
 function reverse(str) {
-    if (typeof (str) !== 'string') {
-        return  'Error';
-    } else {
-        return str.split('').reverse().join("");
-    }
+	if (typeof str !== "string") {
+		return "Error";
+	} else {
+		return str.split("").reverse().join("");
+	}
 }
 
 let res = reverse(someShit);

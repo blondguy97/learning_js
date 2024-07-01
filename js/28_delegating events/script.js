@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     if (btns[1].classList.contains('blue')) {
-        console.log('Класс blue у тега есть');
+        console.log('Класса blue у тега ЕСТЬ');
     } else {
-        console.log('Класса blue у тега нету'); // Выведется это, у 2ой кнопки странице нет класса blue
+        console.log('Класса blue у тега НЕТУ'); // Выведется это, у 2ой кнопки странице нет класса blue
     }
 
 

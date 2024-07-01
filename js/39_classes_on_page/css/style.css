@@ -456,8 +456,9 @@ a {
 
 .menu .container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
 .menu .title {
@@ -472,7 +473,7 @@ a {
 }
 
 .menu__item {
-    width: 320px;
+    width: 350px;
     min-height: 450px;
     background: #fff;
     box-shadow: 0 4px 25px rgba(0, 0, 0, .25);

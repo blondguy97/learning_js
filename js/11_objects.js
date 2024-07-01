@@ -1,23 +1,16 @@
-'use strict';
+"use strict";
 
 let testObj = new Object(); // Один из возможных способов создать объект, но лучше использовать более классический способ
 
 let options = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red',
-        p: {
-            me: 'jake'
-        }
-    }
+	name: "test",
+	width: 1024,
+	height: 1024,
+	colors: {
+		border: "black",
+		bg: "red",
+	},
 };
-
-
-
-
 
 console.log(options.name); // test
 
@@ -25,10 +18,8 @@ delete options.name; // Таким действием мы можем удали
 
 console.log(options); // name: 'test' уже нету, оно удалено
 
-
-
 for (let key in options) {
-    console.log(`Свойство ${key} имеет значение ${options[key]}`);
+	console.log(`Свойство ${key} имеет значение ${options[key]}`);
 }
 
 /* Порой нужно перебрать объект, для такого существует цикл for in. Здесь переменной для перебора ключей объекта options, выбрано слово key (но можно и любое другое выбрать, но часто называют именно словом key) слова in options, означают что мы будет копаться В объекте options, то есть key in options, перебор ключей в объекте options. А в фигурных скобках мы уже задаем блок кода в котором мы говорим что делать с этими перебираемыми ключами, в данном случсе в скобках мы пишем что свойство *переменная key* имеет значение, а далее мы опять пишем переменную в которой указываем собственно сам объект options а в квадратных скобках пишем опять key, то есть уже это не ключ, а значение в объекте options
@@ -42,13 +33,13 @@ for (let key in options) {
  */
 
 for (let key in options) {
-    if (typeof (options[key] === 'object')) {
-        for (let i in options[key]) {
-            console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
-        }
-    } else {
-        console.log(`Свойство ${key} имеет значение ${options[key]}`);
-    }
+	if (typeof (options[key] === "object")) {
+		for (let i in options[key]) {
+			console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
+		}
+	} else {
+		console.log(`Свойство ${key} имеет значение ${options[key]}`);
+	}
 }
 
 /* теперь все работает нормально, перебирается и объект внутри объекта тоже.
@@ -56,14 +47,11 @@ for (let key in options) {
  Если это слишком мозговзрывающая конструкция, ниже более простой пример
  */
 
-console.log(options['colors']['border']);
+console.log(options["colors"]["border"]);
 /* black. То есть это как бы двойной доступ,
 сначала к объекту внутри объекта, а затем уже к его свойству и мы получаем значение black из свойства border */
 
-
-
 /*  Порой нам нужет счетчик для того чтобы узнать сколько свойств (или методов) находится в объекте, классического свойства lenght(длины) у объектов нет, поэтому часто используется такой способ. */
-
 
 console.log(Object.keys(options));
 
@@ -71,46 +59,36 @@ console.log(Object.keys(options));
 
 console.log(Object.keys(options).length); // 4. То есть столько, сколько элементов в объекте
 
-
 let options_2 = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red'
-    },
-    makeTest: function () {
-        console.log('Выпонился блок кода в методе makeTest который находится в объекте options_2');
-    }
+	name: "test",
+	width: 1024,
+	height: 1024,
+	colors: {
+		border: "black",
+		bg: "red",
+	},
+	makeTest: function () {
+		console.log(
+			"Выпонился блок кода в методе makeTest который находится в объекте options_2",
+		);
+	},
 };
 
 /* Метод makeTest в объекте options_2, это функция которая может что-то выполнять, то есть методы объектов мы можем создавать самостоятельно*/
-
 
 options_2.makeTest(); // Выпонился блок кода в методе makeTest который находится в объекте options_2
 
 /* Деструризация объектов (такое возможно и для массивов)*/
 
+const { width } = options_2;
 
-const {
-    width
-} = options_2;
-
-const {
-    bg
-} = options_2.colors; // вытаскиваем свойство bg из объекта colors который находится в объекте options_2
+const { bg } = options_2.colors; // вытаскиваем свойство bg из объекта colors который находится в объекте options_2
 
 console.log(width); // 1024
 console.log(bg); // red
 
-
-
-
 /* И ПОМНИ, ВСЕ В ДЖАВАСКРИПТ ЯВЛЯЕТСЯ ОБЪЕКТОМ И ВСЕ ИДЕТ ОТ ОБЪЕКТА
 ИМЕННО ПОЭТОМУ У СТРОК ПРИ ВЫЗОВЕ КАКОГО-ТО МЕТОДА НА НИХ ПОЯВЛЯЮТСЯ ФУНКЦИИ КОТОРЫХ НЕ ДОЛЖНО БЫТЬ, ВЕДЬ ОНИ ПО ИДЕЕ ПРИМИТИВЫ */
-
-
 
 /*
 
@@ -122,34 +100,26 @@ showFamily(family) => 'Семья состоит из: Peter Ann Alex Linda'
 
 */
 
-const family = ['me', 'she'];
+const family = ["me", "she", "dog"];
 
 function showFamily(arr) {
-    let str = '';
+	let str = "";
 
-    if (arr.length === 0) {
-        str = str + 'Семья пуста';
-    } else {
-        str = str + `Семья состоит из: `;
-    }
+	if (arr.length === 0) {
+		str = str + "Семья пуста";
+	} else {
+		str = str + `Семья состоит из: `;
+        
 
-    arr.forEach(function (item) {
-        str = `${str}${item.toUpperCase()} `;
+		arr.forEach(function (item) {
+			str = str + item + ' ';
+		});
+	}
 
-    });
-
-
-
-    return str;
+	return str;
 }
 
-
 console.log(showFamily(family));
-
-
-
-
-
 
 /* 
 
@@ -167,38 +137,31 @@ P.S.Дальше по курсу мы научимся удобно обраща
 
 */
 
-
 const personalPlanPeter = {
-    name: "Peter",
-    age: "29",
-    skills: {
-        languages: ['ru', 'eng'],
-        programmingLangs: {
-            js: '20%',
-            php: '10%'
-        },
-        exp: '1 month'
-    },
-    showAgeAndLangs: function (plan) {
+	name: "Peter",
+	age: "29",
+	skills: {
+		languages: ["ru", "eng"],
+		programmingLangs: {
+			js: "20%",
+			php: "10%",
+		},
+		exp: "1 month",
+	},
 
+	showAgeAndLangs: function (plan) {
+		let { age } = plan;
 
-        let {
-            age
-        } = plan;
+		let { languages } = plan.skills;
 
-        let {
-            languages
-        } = plan.skills;
+		let str = `Мне ${age} лет и я владею языками: `;
 
-        let str = `Мне ${age} лет и я владею языками: `;
+		languages.forEach(function (lang) {
+			str = str + lang.toUpperCase() + " ";
+		});
 
-        languages.forEach(function (lang) {
-            str = str + lang.toUpperCase() + ' ';
-        });
-
-        return str;
-    }
+		return str;
+	},
 };
-
 
 console.log(personalPlanPeter.showAgeAndLangs(personalPlanPeter));

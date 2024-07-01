@@ -14,51 +14,50 @@
 
 "use strict";
 
-let adv = document.querySelectorAll(".promo__adv img, .promo__adv-title");
+let advs = document.querySelectorAll(".promo__adv img");
+// Указываем через запятую какие именно блоки мы берем
 let genre = document.querySelector(".promo__genre");
 let bg = document.querySelector(".promo__bg");
 let promoList = document.querySelector(".promo__interactive-list");
 let promoItems = document.querySelectorAll(".promo__interactive-item");
 
-
 const movieDB = {
-    movies: [
-        "Анатолий",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Амбар",
-        "Скотт Пилигрим против..."
-    ]
+	movies: [
+		"Анатолий",
+		"Лига справедливости",
+		"Ла-ла лэнд",
+		"Амбар",
+		"Скотт Пилигрим против...",
+	],
 };
 
-adv.forEach(function (item) {
-    item.remove();
-});
+ 
 
+
+advs.forEach(function (item) {
+	item.remove();
+});
 
 /* ИЛИ
 
 for (let i = 0; i < adv.length; i++) {
-    adv[i].remove();
+	adv[i].remove();
 }
 
 
 */
 
-
 genre.textContent = "Драма";
 
-bg.style.backgroundImage = 'url("img/bg.jpg")';
+bg.style.backgroundImage = 'url("img/bg.jpg")'; // Меняем задний фон блока с постером 
 
+promoList.innerHTML = ""; // Очищаем весь список фильмов присвоив в html пустоту
 
-promoList.innerHTML = '';
+movieDB.movies.sort(); // Сортируем все фильмы в массиве по алфавиту
 
-movieDB.movies.sort();
-
-movieDB.movies.forEach(function (item, num) {
-    promoList.innerHTML = promoList.innerHTML +
-        `<li class="promo__interactive-item">
-                        ${num + 1} ${item}
-                            <div class="delete"></div>
-                        </li>`;
+movieDB.movies.forEach(function (item, numOfFilm) {
+	promoList.innerHTML = promoList.innerHTML +
+		`<li class="promo__interactive-item"> 
+				${numOfFilm + 1}.
+         ${item}<div class="delete"></div></li>`;
 });

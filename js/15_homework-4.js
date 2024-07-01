@@ -12,77 +12,96 @@
 при помощи метода forEach вывести в консоль сообщения в таком виде:
 "Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"*/
 
-'use strict';
+"use strict";
 
 let personalMovieDB = {
-    count: 0,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: true,
-    start: function () {
-        personalMovieDB.count = prompt('Сколько фильмов вы уже посмотрели?');
-        while (personalMovieDB.count === '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
-            personalMovieDB.count = prompt('Сколько фильмов вы уже посмотрели?');
-        }
-    },
-    detectPersonalLvl: function () {
-        if (personalMovieDB.count < 10) {
-            alert('Просмотрено довольно мало фильмов');
-        } else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
-            alert('Вы классический зритель');
-        } else if (personalMovieDB.count > 30) {
-            alert('Вы киноман!');
-        } else {
-            alert('Ошибка!');
-        }
-    },
-    rememberMyMovies: function () {
-        for (let i = 0; i < 2; i++) {
-            let a = prompt('Один из последних просмотренных фильмов?').trim(),
-                b = prompt('На сколько оцените его?').trim();
-            /* метод trim ставим чтобы пользователь не мог ввести одни пробелы и это засчиталось бы за ответ */
-            if (a == '' || b == '' || a == null || b == null || a.length > 50) {
-                i--;
-                console.log('error');
-            } else {
-                personalMovieDB.movies[a] = b;
-            }
-        }
-    },
+	count: 0,
+	movies: {},
+	actors: {},
+	genres: [],
+	privat: true,
+	start: function () {
+		personalMovieDB.count = prompt("Сколько фильмов вы уже посмотрели?");
+		while (
+			personalMovieDB.count === "" ||
+			personalMovieDB.count == null ||
+			isNaN(personalMovieDB.count)
+		) {
+			personalMovieDB.count = prompt(
+				"Сколько фильмов вы уже посмотрели?",
+			);
+		}
+	},
+	detectPersonalLvl: function () {
+		if (personalMovieDB.count < 10) {
+			alert("Просмотрено довольно мало фильмов");
+		} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+			alert("Вы классический зритель");
+		} else if (personalMovieDB.count > 30) {
+			alert("Вы киноман!");
+		} else {
+			alert("Ошибка!");
+		}
+	},
+	rememberMyMovies: function () {
+		for (let i = 0; i < 2; i++) {
+			let a = prompt("Один из последних просмотренных фильмов?").trim(),
+				b = prompt("На сколько оцените его?").trim();
+			/* метод trim ставим чтобы пользователь не мог ввести одни пробелы и это засчиталось бы за ответ */
+			if (a == "" || b == "" || a == null || b == null || a.length > 50) {
+				i--;
+				console.log("error");
+			} else {
+				personalMovieDB.movies[a] = b;
+			}
+		}
+	},
 
-    writeYourGenres: function () {
-        for (let i = 1; i <= 3; i++) {
-            let genre = prompt(`Ваш любимый жанр под номером ${i}`);
-            if (genre == null || genre == '') {
-                i--;
-                alert('Вы ввели ввели неверные данные или отменили действие!');
-            } else {
-                personalMovieDB.genres[i - 1] = genre;
-            }
-        }
+	writeYourGenres: function () {
+		for (let i = 1; i <= 3; i++) {
+			let genre = prompt(`Ваш любимый жанр под номером ${i}`);
+			if (genre == null || genre == "") {
+				i--;
+				alert("Вы ввели ввели неверные данные или отменили действие!");
+			} else {
+				personalMovieDB.genres[i - 1] = genre;
+			}
+		}
 
-        personalMovieDB.genres.forEach(function (item, i, arr) {
-            console.log(`Любимый жанр под номером ${i + 1} - это ${item} из массива ${arr}`);
-        });
-    },
-    showMyDB: function () {
-        if (personalMovieDB.privat) {
-            console.log('Приватно');
-        } else {
-            console.log(personalMovieDB);
-        }
-    },
-    toggleVisibleMyDB: function () {
-        if (personalMovieDB.privat) {
-            personalMovieDB.privat = false;
-        } else {
-            personalMovieDB.privat = true;
-        }
-    }
+		personalMovieDB.genres.forEach(function (item, i, arr) {
+			console.log(
+				`Любимый жанр под номером ${
+					i + 1
+				} - это ${item} из массива ${arr}`,
+			);
+		});
+
+		// for (let i = 0; i < personalMovieDB.genres.length; i++) {
+		// 	console.log(
+		// 		`Любимый жанр под номером ${i + 1} - это ${
+		// 			personalMovieDB.genres[i]
+		// 		} из массива ${personalMovieDB.genres}`,
+		// 	);
+
+		//  МОЖНО ИСПОЛЬЗОВАТЬ И ТАКОЙ ЦИКЛ  }
+	},
+	showMyDB: function () {
+		if (personalMovieDB.privat) {
+			console.log("Приватно");
+		} else {
+			console.log(personalMovieDB);
+		}
+	},
+	toggleVisibleMyDB: function () {
+		if (personalMovieDB.privat) {
+			personalMovieDB.privat = false;
+		} else {
+			personalMovieDB.privat = true;
+		}
+	},
 };
 
-
+personalMovieDB.writeYourGenres();
 
 /* Задача:
 
@@ -125,30 +144,41 @@ let personalMovieDB = {
 
 Задача интересная, немного заковыристая, но все необходимое для неё мы уже проходили.Просто распишите логику действий строка за строкой.*/
 
-const students = ['Peter', 'andrew', 'Baba', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'takeda', 'kenshi'];
+const students = [
+	"Peter",
+	"andrew",
+	"Baba",
+	"Ann",
+	"Mark",
+	"Josh",
+	"Sandra",
+	"Cris",
+	"Bernard",
+	"takeda",
+	"kenshi",
+];
 
 function sortStudentsByGroups(arr) {
+	arr.sort();
 
-    arr.sort();
+	let a = [];
+	let b = [];
+	let c = [];
+	let rest = [];
 
-    let a = [];
-    let b = [];
-    let c = [];
-    let rest = [];
+	for (let i = 0; i < arr.length; i++) {
+		if (i < 3) {
+			a.push(arr[i]);
+		} else if (i < 6) {
+			b.push(arr[i]);
+		} else if (i < 9) {
+			c.push(arr[i]);
+		} else {
+			rest.push(arr[i]);
+		}
+	}
 
-    for (let i = 0; i < arr.length; i++) {
-        if (i < 3) {
-            a.push(arr[i]);
-        } else if (i < 6) {
-            b.push(arr[i]);
-        } else if (i < 9) {
-            c.push(arr[i]);
-        } else {
-            rest.push(arr[i]);
-        }
-    }
-
-    return [a, b, c, rest.join(', ')];
+	return [a, b, c, rest.join(", ")];
 }
 
 console.log(sortStudentsByGroups(students));

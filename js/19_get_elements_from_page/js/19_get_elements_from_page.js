@@ -22,6 +22,8 @@ console.log(btns_2); /*  <button style="background-color: red; width: 1000px;">2
 
 let circles = document.getElementsByClassName('circle'); /* Получаем все элементы с классом circle по имени класса, и опять же получаем HTML-коллекцию, обращаем внимаение на слово Elements, то есть множественное число */
 
+console.log(circles[0]); /* Таким образом мы также можем получать только какой-то один конкретный элемент из псевдомассива, в нашем случае только первый кружок со страницы */
+
 /* Переходим к более функциональным и современным методам поиска элементов на странице */
 
 let hearts = document.querySelectorAll('.heart');

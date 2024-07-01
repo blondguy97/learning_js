@@ -2,7 +2,9 @@
 
 /* С помощью умения путешествовать по DOM дереву мы сможем обращаться к определенному элементу и обратиться к его родителю или к следующему элементу и у них уже поменять класс */
 
-console.log(document.body);
+
+
+ console.log(document.body);
 console.log(document.documentElement);
 
 //  Таким образом мы получаем всю HTML разметку
@@ -14,10 +16,10 @@ console.log(document.body.childNodes);
 
 /* Методы которые позволят нам путешествовать по DOM дереву */
 
-console.log(document.body.firstChild); 
+console.log(document.body.firstChild);
 console.log(document.body.lastChild);
 
-/* Таким образом мы получаем первый и последний НОДЫ(узлы) на странице
+/* Таким образом мы получаем первый и последний НОДЫ (узлы) на странице
 Но тут мы отталкивались только от родителей, но можно отталкиваться
 и от абсолютно любого элемента на странице */
 
@@ -40,12 +42,12 @@ console.log(document.querySelector('[data-current="3"]').previousSibling);
  И то и то другое будут переносами строк
  */
 
-// Но есть методы которые вызывают конкретно элементы, например nextElementSibling и previousElementSibling
+// Но есть методы которые вызывают конкретно элементы, а не переносы строк и всякую хню. У нас есть например nextElementSibling и previousElementSibling
 
 console.log(document.querySelector('[data-current="3"]').nextElementSibling);
 console.log(document.querySelector('[data-current="3"]').previousElementSibling);
 console.log(document.querySelector('[data-current="3"]').parentElement);
-// Таким образом мы выбираем родительский ЭЛЕМЕНТ, а не ноду(узел)
+// Таким образом мы выбираем родительский ЭЛЕМЕНТ, а не ноду (узел)
 
 console.log(document.body.firstElementChild);
 console.log(document.body.lastElementChild);
@@ -64,4 +66,3 @@ for (let node of document.body.childNodes) {
 
 
 
- 

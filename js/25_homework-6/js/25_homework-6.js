@@ -34,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let ads = document.querySelectorAll(".promo__adv img, .promo__adv-title");
     let genre = document.querySelector(".promo__genre");
-    let bg = document.querySelector(".promo__bg");
+    let promoBg = document.querySelector(".promo__bg");
     let promoList = document.querySelector(".promo__interactive-list");
-    let promoItems = document.querySelectorAll(".promo__interactive-item");
     let checkbox = document.querySelector('input[type="checkbox"]');
     let form = document.querySelector('form.add');
     let input = document.querySelector('.adding__input');
@@ -56,31 +55,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+    form.addEventListener('submit', function (event) {
+        event.preventDefault()
+
+        let newFilm = input.value.trim();
+        let favMovie = checkbox.checked;
+
+        if (newFilm.length > 0) { // Создаем такое условие что все срабатывает только если в поле больше 0 символов
+            if (newFilm.length > 20) {
+                newFilm = newFilm.slice(0, 20)  + '...';
+            }
+
+            movieDB.movies.push(newFilm);
+            movieSort(movieDB.movies)
+            createMovieList( movieDB.movies, promoList)
+        }
+ 
+ 
+        if (favMovie) {
+            console.log(`${newFilm} выбран одним из любимых фильмов`);
+        }
+        event.target.reset();
+    })
+
+
 
 
     function deleteAds(advertisements) {
         advertisements.forEach(function (item) {
             item.remove();
         });
-
-        /* ИЛИ
-            for (let i = 0; i < advertisements.length; i++) {
-                advertisements[i].remove();
-            }
-        */
-
     }
-
-
-
-
 
 
     function makeChanges() {
         genre.textContent = "Драма";
-        bg.style.backgroundImage = 'url("img/bg.jpg")';
+        promoBg.style.backgroundImage = 'url("img/bg.jpg")';
     }
-
 
 
     function movieSort(movies) {
@@ -89,76 +100,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
     function createMovieList(films, parent) {
 
-        while (films.firstChild) {
-            films.removeChild(films.firstChild);
-        }
+        parent.innerHTML = '';
+        movieSort(movieDB.movies)
 
-        movieSort(parent)
-
-
-        parent.forEach(function (item, num) {
-            films.innerHTML = films.innerHTML +
+ 
+        films.forEach(function (item, num) {
+            
+            parent.innerHTML = parent.innerHTML +
                 `<li class="promo__interactive-item">
                     ${num + 1}. ${item}
                         <div class="delete"></div>
                     </li>`;
         });
 
-        document.querySelectorAll('.delete').forEach(function (btn, i) {
-            btn.addEventListener('click', function () {
+        document.querySelectorAll('.delete').forEach(function(btn, num) {
+            btn.addEventListener('click', function() {
                 btn.parentElement.remove();
-                movieDB.movies.splice(i, 1);
+                movieDB.movies.splice(num, 1)
+                createMovieList(movieDB.movies, promoList)
 
-                createMovieList(promoList, movieDB.movies);
-                /* Применяем рекурсию и после клика по корзине, удаляем родительский элемент со страницы и этот элемент из массива, и заново строим список через функцию createMovieList вызывая эту функцию саму в себе с передачей аргументов, и теперь список будет каждый раз актуальным при удалении элементов */
             })
+            
         })
-
+        
     }
-
-
-
-
-
-
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault()
-
-        let newFilm = input.value;
-        let favMovie = checkbox.checked;
-
-        if (newFilm) {
-
-            if (newFilm.length > 20) {
-                newFilm = `${newFilm.slice(0, 20)}...`
-            }
-            movieDB.movies.push(newFilm);
-            movieSort(movieDB.movies)
-
-
-
-        }
-        createMovieList(promoList, movieDB.movies)
-
-
-        if (favMovie) {
-            console.log(`${newFilm} выбран одним из любимых фильмов`);
-        }
-
-        event.target.reset();
-
-
-    })
-
-
-
 
     deleteAds(ads)
     makeChanges()
-    createMovieList(promoList, movieDB.movies)
+    createMovieList(movieDB.movies, promoList)
 
 
 })
