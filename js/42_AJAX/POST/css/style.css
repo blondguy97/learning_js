@@ -455,10 +455,10 @@ a {
 }
 
 .menu .container {
+    gap: 20px;
+    flex-wrap: wrap;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start
-}
+ }
 
 .menu .title {
     text-align: center
@@ -660,7 +660,7 @@ a {
     background-color: rgba(0, 0, 0, .5)
 }
 
- 
+
 
 .modal__content {
     position: absolute;
@@ -674,6 +674,11 @@ a {
     max-width: 400px;
     max-height: 80vh;
     overflow-y: auto;
+}
+
+.status {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .modal__close {

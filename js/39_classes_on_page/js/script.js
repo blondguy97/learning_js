@@ -20,10 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
-
-
-
-
     function showTabContent(i = 0) {
         tabsContent[i].classList.add('show', 'fade');
         tabsContent[i].classList.remove('hide');

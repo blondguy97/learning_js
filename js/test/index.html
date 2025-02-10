@@ -1,15 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Color Zoom</title>
+    <style>
+        #color-zoom {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 900px;
+            width: 900px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #color-zoom div {
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .color-zoom td {
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
+    <table class="color-zoom">
+        <tr>
+            <td id="RAL_2000" style="background-color: red;"></td>
+            <td>Some description</td>
+        </tr>
+        <tr>
+            <td id="color_blue" style="background-color: blue;"></td>
+            <td>Some description</td>
+        </tr>
+        <tr>
+            <td id="color_green" style="background-color: rgb(21, 255, 0);"></td>
+            <td>Some description</td>
+        </tr>
+    </table>
 
-    <div class="out"></div>
+    <div id="color-zoom">
+        <div></div>
+    </div>
 
-    <script src="test.js"></script>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var originalTitle = document.title;
+            var colorZoom = document.getElementById('color-zoom');
+            var colorZoomDiv = colorZoom.querySelector('div');
+
+            function showColorZoom(e) {
+                var color = e.target.style.backgroundColor;
+                var colorId = e.target.id;
+                var colorName = colorId.replace(/_/g, ' ');
+                var description = e.target.nextElementSibling.innerHTML.replace('<br>', ' — ');
+
+                colorZoomDiv.style.backgroundColor = color;
+                colorZoomDiv.textContent = colorName;
+                colorZoom.style.display = 'flex';
+                document.title = description;
+
+                history.replaceState({}, "", "#" + colorId);
+
+                function preventScroll(e) {
+                    e.preventDefault();
+                }
+
+                window.addEventListener('DOMMouseScroll', preventScroll, { passive: false });
+                window.onmousewheel = document.onmousewheel = preventScroll;
+
+                document.addEventListener('keydown', closeColorZoom, { once: true });
+            }
+
+            function closeColorZoom() {
+                colorZoom.style.display = 'none';
+                document.title = originalTitle;
+                history.replaceState("", "", window.location.pathname);
+
+                function allowScroll(e) {
+                    e.preventDefault();
+                }
+
+                window.removeEventListener('DOMMouseScroll', allowScroll, { passive: false });
+                window.onmousewheel = document.onmousewheel = null;
+            }
+
+            colorZoom.addEventListener('click', closeColorZoom);
+
+            
+            colorZoom.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+            });
+
+            var colorZoomCells = document.querySelectorAll('.color-zoom td:first-child');
+            colorZoomCells.forEach(function (cell) {
+                cell.addEventListener('click', showColorZoom);
+            });
+
+            var hash = location.hash.replace(/^#/, "");
+            if (hash && document.getElementById(hash)) {
+                document.getElementById(hash).click();
+            }
+        });
+    </script>
 </body>
+
 </html>
